@@ -38,9 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login", "/cinema/api/v1/users/refresh").permitAll();
+        http.authorizeRequests().antMatchers("/login", "/cinema/api/v1/users/refresh", "/cinema/api/v1/users").permitAll();
         http.authorizeRequests()
-                .antMatchers( "/cinema/api/v1/users/**")
+                .antMatchers(GET, "/cinema/api/v1/users/")
                 .hasAnyAuthority("ROLE_USERS", "ROLE_ADMIN");
         http.authorizeRequests()
                 .antMatchers("/cinema/api/v1/movies/**")
